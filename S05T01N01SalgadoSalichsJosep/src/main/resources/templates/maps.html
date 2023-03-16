@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="template/template2 :: head"></head>
+<body>
+<header th:replace="template/template2 :: header"></header>
+
+<div class="container">
+    <h1>MAPS!!!</h1>
+
+    <!--Google map-->
+    <!--Google map-->
+    <div id="map" class="z-depth-1-half map-container" style="height: 500px">
+        <!--
+        <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                frameborder="0"
+                style="border:2" allowfullscreen></iframe>
+                -->
+    </div>
+    <!-- -->
+    <script>
+      function initMap() {
+        var test= {lat: -25.363, lng: 131.044};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: test
+        });
+        var marker = new google.maps.Marker({
+          position: test,
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2bXKNDezDf6YNVc-SauobynNHPo4RJb8&callback=initMap">
+    </script>
+    <!--Google Maps-->
+    <!--Google Maps-->
+
+</div>
+<footer th:replace="template/template2 :: footer"></footer>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+.req {
+  color: red;
+}
+
+
+*:required {
+  background-color: gold;
+}

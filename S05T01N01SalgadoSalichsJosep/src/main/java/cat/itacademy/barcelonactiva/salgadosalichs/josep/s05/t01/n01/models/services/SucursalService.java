@@ -1,11 +1,13 @@
 package cat.itacademy.barcelonactiva.salgadosalichs.josep.s05.t01.n01.models.services;
 
 import cat.itacademy.barcelonactiva.salgadosalichs.josep.s05.t01.n01.models.dto.SucursalDTO;
-import cat.itacademy.barcelonactiva.salgadosalichs.josep.s05.t01.n01.models.entity.Sucursal;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service layer for Sucursal
+ */
 @Service
 public interface SucursalService {
     //region METHODS

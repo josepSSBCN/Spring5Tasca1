@@ -1,30 +1,40 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="template/template2 :: head">
+<head th:replace="~{template/template2 :: head}">
 </head>
 <body>
-<header th:replace="template/template2 :: header"></header>
+<header th:replace="~{template/template2 :: header}"></header>
 
 <div class="container">
     <div class="card bg-light">
         <div class="card-header bg-dark text-white" th:text="${title}"></div>
         <div class="card-body">
             <form th:action="@{/sucursal/add}" th:object="${sucursal}" method="post">
-                <div class="form-group row top-buffer">
+                <div class="form-group row">
                     <input type="hidden" th:field="*{pk_SucursalID}">
-                    <label class="col-md-2" for="nomSucursal">Sucursal Name:</label>
-                    <input type="text" th:field="*{nomSucursal}" class="form-control form-control-sm col-md-2"
-                           id="nomSucursal" placeholder="Sucursal name">
-                    <small></small>
+                    <label class="col-md-2" for="nomSucursal">Sucursal Name: <span class="req">*</span></label>
+                    <input type="text" th:field="*{nomSucursal}" class="form-control form-control-sm col-md-6"
+                           id="nomSucursal" placeholder="Sucursal name" required>
+                    <!--
+                    <small class="form-text text-danger"
+                           th:if="${#fields.hasErrors('nomSucursal')}"
+                           th:errors="*{nomSucursal}">
+                    </small>
+                    -->
+
                 </div>
 
                 <div class="form-group row top-buffer">
-                    <label class="col-md-2" for="paisSucursal">Country:</label>
+                    <label class="col-md-2" for="paisSucursal">Country: <span class="req">*</span></label>
                     <select th:field="*{paisSucursal}" class="form-control form-control-sm col-md-3" id="paisSucursal">
                         <option th:each="country:${countries}"
-                                th:text ="${country}"
-                                th:value ="${country}"></option>
+                                th:text="${country}"
+                                th:value="${country}"></option>
                     </select>
+                </div>
+
+                <div class="form-group row top-buffer">
+                    <p><span class="req">*</span> - Required field</p>
                 </div>
 
                 <div class="card-footer bg-dark top-buffer">
@@ -34,6 +44,6 @@
         </div>
     </div>
 </div>
-<footer th:replace="template/template2 :: footer"></footer>
+<footer th:replace="~{template/template2 :: footer}"></footer>
 </body>
 </html>

@@ -2,9 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
     <meta charset="UTF-8">
-    <title>TEMPLATE</title>
+    <title>ITAcademy: Java BE 5.1.1</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/maps.css}">
+    <link rel="stylesheet" th:href="@{/css/s5t1n1e1.css}">
 </head>
 <body>
 <!-- NAVEGATION BAR -->
@@ -12,7 +13,9 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <strong>MyLogo</strong>
+                <strong>
+                    <img src="/images/IT-Academy.png" style="height:40px">
+                </strong>
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -30,16 +33,24 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" th:href="@{/sucursal/index}">Home</a>
+                        <a class="nav-link active" aria-current="page" th:href="@{/sucursal/home}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/sucursal/getAll}">Sucursals</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/sucursal/new}">New</a>
+                        <a class="nav-link" th:href="@{/sucursal/addFrom}">New</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/sucursal/maps}">Map</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav navbar-right">
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:9000/swagger-ui/index.html" th:target="_blank">
+                            <img src="/images/swagger2.png" style="width:40px">
+                            API info
+                        </a>
                     </li>
                 </ul>
             </div>

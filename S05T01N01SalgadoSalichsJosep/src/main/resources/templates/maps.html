@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="template/template2 :: head"></head>
+<head th:replace="~{template/template2 :: head}"></head>
 <body>
-<header th:replace="template/template2 :: header"></header>
+<header th:replace="~{template/template2 :: header}"></header>
 
 <div class="container">
     <h1>MAPS!!!</h1>
@@ -16,6 +16,7 @@
                 style="border:2" allowfullscreen></iframe>
                 -->
     </div>
+
     <!-- -->
     <script>
       function initMap() {
@@ -37,7 +38,7 @@
     <!--Google Maps-->
 
 </div>
-<footer th:replace="template/template2 :: footer"></footer>
+<footer th:replace="~{template/template2 :: footer}"></footer>
 
 </body>
 </html>

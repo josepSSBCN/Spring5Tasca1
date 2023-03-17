@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="template/template2 :: head">
+<head th:replace="~{template/template2 :: head}">
 </head>
+<style>
+    h1  {text-align:center;}
+</style>
 <body>
-<header th:replace="template/template2 :: header"></header>
+<header th:replace="~{template/template2 :: header}"></header>
 
 <div class="container">
     <!-- TITLE -->
     <div class="container">
-        <h1 th:text="${title}">title</h1>
+        <h1 th:text="${title}" >title</h1>
     </div>
 
     <!-- TABLE -->
@@ -32,12 +35,13 @@
                 <td th:text="${cl.tipusSucursal}"></td>
                 <td>
                     <a class="btn btn-success btn-sm" th:href="@{/sucursal/update/} + ${cl.pk_SucursalID}"
-                       th:text="'Edit'" title="Edit Sucursal">
+                       th:text="'Update'" title="Update Sucursal">
                     </a>
                 </td>
                 <td>
                     <a class="btn btn-danger btn-sm" th:href="@{/sucursal/delete/} + ${cl.pk_SucursalID}"
-                       th:text="'Delete'" title="Delete Sucursal">
+                       th:text="'Delete'" title="Delete Sucursal"
+                       onclick="return confirm('Are you sure delete this sucursal?')">
                     </a>
                 </td>
             </tr>
@@ -46,6 +50,6 @@
     </div>
 
 </div>
-<footer th:replace="template/template2 :: footer"></footer>
+<footer th:replace="~{template/template2 :: footer}"></footer>
 </body>
 </html>

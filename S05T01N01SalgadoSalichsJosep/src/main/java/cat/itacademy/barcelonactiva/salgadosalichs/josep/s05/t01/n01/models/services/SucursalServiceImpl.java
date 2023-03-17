@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class SucursalService_Impl implements SucursalService{
+public class SucursalServiceImpl implements SucursalService {
     //region ATTRIBUTES
     @Autowired
     private SucursalRepoInt sucursalRepoInt;
@@ -45,7 +45,7 @@ public class SucursalService_Impl implements SucursalService{
 
             // Transform from Sucursal to SucursalDTO
             sucursalOut = Utils.modelMapper.map(sucursal2, SucursalDTO.class);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
         //endregion ACTIONS
@@ -69,7 +69,7 @@ public class SucursalService_Impl implements SucursalService{
             sucursalRepoInt.deleteById(idIn);
 
             resul = true;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
 
@@ -78,6 +78,7 @@ public class SucursalService_Impl implements SucursalService{
 
         // OUT
         return resul;
+
     }
 
     @Override
@@ -96,7 +97,7 @@ public class SucursalService_Impl implements SucursalService{
         sucursalList = sucursalRepoInt.findAll();
 
         // Transform Sucursal type to SucursalDTO
-        for (Sucursal suc: sucursalList) {
+        for (Sucursal suc : sucursalList) {
             // Calculate the 'tipusSucursal' field.
             sucursalType = Utils.checkTypeCountry(suc.getPaisSucursal());
             // Transform to SucursalDTO and add tolist.
@@ -109,6 +110,7 @@ public class SucursalService_Impl implements SucursalService{
 
         // OUT
         return sucursalDTOList;
+
     }
 
     @Override
@@ -121,14 +123,14 @@ public class SucursalService_Impl implements SucursalService{
 
 
         //region ACTIONS
-        try{
+        try {
             // Find in DDBB
             sucursalSaved = sucursalRepoInt.findById(idIn).get();
 
             // Transform from Sucursal to SucursalDTO
             sucursalOutDTO = Utils.modelMapper.map(sucursalSaved, SucursalDTO.class);
 
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
 
@@ -159,7 +161,7 @@ public class SucursalService_Impl implements SucursalService{
             // Transform Sucursal to SucursalDTO
             sucursalOutDTO = Utils.modelMapper.map(sucursalSaved, SucursalDTO.class);
 
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
             sucursalOutDTO = null;
         }

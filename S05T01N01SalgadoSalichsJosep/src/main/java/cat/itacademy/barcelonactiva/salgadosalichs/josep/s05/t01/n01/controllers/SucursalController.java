@@ -3,14 +3,15 @@ package cat.itacademy.barcelonactiva.salgadosalichs.josep.s05.t01.n01.controller
 import cat.itacademy.barcelonactiva.salgadosalichs.josep.s05.t01.n01.models.dto.SucursalDTO;
 import cat.itacademy.barcelonactiva.salgadosalichs.josep.s05.t01.n01.models.services.SucursalService;
 import cat.itacademy.barcelonactiva.salgadosalichs.josep.s05.t01.n01.utils.Utils;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,24 +25,22 @@ public class SucursalController {
     //endregion ATTRIBUTES
 
 
-    //region CONSTRUCTOR
-
-    //endregion CONSTRUCTOR
-
-
     //region METHODS: CHANGEPAGES
-    @GetMapping({"/home", "/index", "/"})
+    @GetMapping(value = {"/home", "/"})
+    @Operation(summary = "Go to 'home' page.", description = "EndPoint to go 'home' page.", tags = "CHANGE PAGE")
     public String indexForm() {
-        return "home";
+        return "/home";
     }
 
-    @GetMapping({"/maps"})
+    @GetMapping(value = "/maps")
+    @Operation(summary = "Go to 'maps' page.", description = "EndPoint to go 'maps' page.", tags = "CHANGE PAGE")
     public String mapForm() {
         return "maps";
     }
 
-    @GetMapping({"/created"})
-    public String createdForm(Model model) {
+    @GetMapping(value = "/addFrom")
+    @Operation(summary = "Go to 'add' page.", description = "EndPoint to go 'add' page.", tags = "CHANGE PAGE")
+    public String addForm(Model model) {
         //region VARIABLES
         List<String> countriesList = new ArrayList<>();
         SucursalDTO sucursalDTO = new SucursalDTO();
@@ -67,11 +66,12 @@ public class SucursalController {
 
     }
 
-    @GetMapping("/update/{id}")
-    public String updateForm(@PathVariable("id") int idIn, Model model ){
+    @GetMapping(value = "/update/{id}")
+    @Operation(summary = "Go to 'update' page.", description = "EndPoint to go 'add' page.", tags = "CHANGE PAGE")
+    public String updateForm(@PathVariable("id") int idIn, Model model) {
         //region VARIABLES
         List<String> countriesList = new ArrayList<>();
-        SucursalDTO sucursalDTO = new SucursalDTO();
+        SucursalDTO sucursalDTO;
 
         //endregion VARIABLES
 
@@ -86,7 +86,7 @@ public class SucursalController {
         sucursalDTO = sucursalService.getOne(idIn);
 
         // Add attributes
-        model.addAttribute("title", "EDIT SUCURSAL");
+        model.addAttribute("title", "UPDATE SUCURSAL");
         model.addAttribute("countries", countriesList);
         model.addAttribute("sucursal", sucursalDTO);
 
@@ -102,22 +102,54 @@ public class SucursalController {
 
 
     //region METHODS: CRUD
-    @PostMapping("/add")
-    public String add(@ModelAttribute SucursalDTO sucursalDTO){
-        //region ACTIONS
-        sucursalService.add(sucursalDTO);
+    @PostMapping(value = "/add")
+    @Operation(summary = "Add a new Sucursal.", description = "EndPoint for to add a new Sucursal to system.", tags = "CRUD: ADD")
+    public String add(@Valid @ModelAttribute SucursalDTO sucursalDTO, BindingResult result, Model model) {
+        //region VARIABLES
+        String returnValue, messageValue;
+        List<String> countriesList;
 
-        //endregion ACTIONS
+        //endregion VARIABLES
+
+
+        //region actions
+        // Check if there is a some error
+        if (sucursalDTO.getNomSucursal().isEmpty()) { //todo result.hasErrors() Why result has a 0 errors when 'nomSucursal' is empty?
+            // Get all countries
+            countriesList = new ArrayList<>();
+            countriesList.addAll(Utils.getCountriesUE());
+            countriesList.addAll(Utils.getCountriesNoUE());
+            Collections.sort(countriesList);
+
+            // Add attributes
+            model.addAttribute("title", "NEW SUCURSAL");
+            model.addAttribute("countries", countriesList);
+            model.addAttribute("sucursal", sucursalDTO);
+
+            // Out values
+            messageValue = "Some error occurred!";
+            returnValue = "redirect:/sucursal/addFrom";
+        } else {
+            // Add the new sucursal to DDBB
+            sucursalService.add(sucursalDTO);
+
+            // Out values
+            messageValue = "Sucursal saved!";
+            returnValue = "redirect:/sucursal/getAll";
+        }
+
+        //endregion actions
 
 
         // OUT
-        System.out.println("Sucursal saved!");
-        return "redirect:/sucursal/getAll";
+        System.out.println(messageValue);
+        return returnValue;
 
     }
 
-    @GetMapping("/getAll")
-    public String getAll(Model model){
+    @GetMapping(value = "/getAll")
+    @Operation(summary = "Get all Sucursals.", description = "EndPoint for to get all sucursals what system have.", tags = "CRUD: GET")
+    public String getAll(Model model) {
         //region VARIABLES
         List<SucursalDTO> sucursalDTOList;
 
@@ -129,7 +161,7 @@ public class SucursalController {
         sucursalDTOList = sucursalService.getAll();
 
         // Add attributes
-        model.addAttribute("title","Sucursals List from java");
+        model.addAttribute("title", "Sucursal's List");
         model.addAttribute("sucursals", sucursalDTOList);
 
         //endregion ACTIONS
@@ -140,13 +172,17 @@ public class SucursalController {
 
     }
 
-    @GetMapping("/getOne")
-    public String getOne(Model model){
+    @GetMapping(value = "/getOne")
+    @Operation(summary = "Get one Sucursal.", description = "EndPoint for to get only one sucursal.", tags = "CRUD: GET")
+    public String getOne(Model model) {
         return "";
     }
 
+
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") int idIn){
+    @Operation(summary = "Delete one Sucursal.", description = "EndPoint for to delete one sucursal.", tags = "CRUD: DELETE")
+    //todo @DeleteMapping(value = "/delete/{id}") Why when I put this annotation does not work?
+    public String delete(@PathVariable("id") Integer idIn) {
         //region VARIABLES
 
         //endregion VARIABLES
@@ -165,6 +201,5 @@ public class SucursalController {
     }
 
     //endregion METHODS: CRUD
-
 
 }

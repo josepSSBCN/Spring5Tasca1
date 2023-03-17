@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Class Repository for Sucursal to managment SQL DDBB.
+ * Class Repository for Sucursal to management SQL DDBB.
  */
 @Repository
 public interface SucursalRepoInt extends JpaRepository<Sucursal, Integer> {

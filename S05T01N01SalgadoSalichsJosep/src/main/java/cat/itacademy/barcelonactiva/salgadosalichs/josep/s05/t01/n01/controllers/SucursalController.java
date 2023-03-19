@@ -102,8 +102,8 @@ public class SucursalController {
 
 
     //region METHODS: CRUD
-    @PostMapping(value = "/add")
     @Operation(summary = "Add a new Sucursal.", description = "EndPoint for to add a new Sucursal to system.", tags = "CRUD: ADD")
+    @PostMapping(value = "/add")
     public String add(@Valid @ModelAttribute SucursalDTO sucursalDTO, BindingResult result, Model model) {
         //region VARIABLES
         String returnValue, messageValue;
@@ -147,6 +147,23 @@ public class SucursalController {
 
     }
 
+    @GetMapping("/delete/{id}")
+    @Operation(summary = "Delete one Sucursal.", description = "EndPoint for to delete one sucursal.", tags = "CRUD: DELETE")
+    //todo @DeleteMapping(value = "/delete/{id}") Why when I put this annotation does not work?
+    public String delete(@PathVariable("id") Integer idIn) {
+        //region ACTIONS
+        sucursalService.delete(idIn);
+
+        //endregion ACTIONS
+
+
+        // OUT
+        System.out.println("Sucursal deleted with exit!");
+        return "redirect:/sucursal/getAll";
+
+    }
+
+
     @GetMapping(value = "/getAll")
     @Operation(summary = "Get all Sucursals.", description = "EndPoint for to get all sucursals what system have.", tags = "CRUD: GET")
     public String getAll(Model model) {
@@ -179,26 +196,6 @@ public class SucursalController {
     }
 
 
-    @GetMapping("/delete/{id}")
-    @Operation(summary = "Delete one Sucursal.", description = "EndPoint for to delete one sucursal.", tags = "CRUD: DELETE")
-    //todo @DeleteMapping(value = "/delete/{id}") Why when I put this annotation does not work?
-    public String delete(@PathVariable("id") Integer idIn) {
-        //region VARIABLES
-
-        //endregion VARIABLES
-
-
-        //region ACTIONS
-        sucursalService.delete(idIn);
-
-        //endregion ACTIONS
-
-
-        // OUT
-        System.out.println("Sucursal deleted with exit!");
-        return "redirect:/sucursal/getAll";
-
-    }
 
     //endregion METHODS: CRUD
 

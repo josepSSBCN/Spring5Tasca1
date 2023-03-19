@@ -20,16 +20,11 @@ public class SucursalServiceImpl implements SucursalService {
     //endregion ATTRIBUTES
 
 
-    //region CONSTRUCTOR
-
-    //endregion CONSTRUCTOR
-
-
     //region METHODS: OVERRIDE
     @Override
     public SucursalDTO add(SucursalDTO sucursalIn) {
         //region VARIABLES
-        Sucursal sucursal = new Sucursal(), sucursal2 = new Sucursal();
+        Sucursal sucursalToSave, sucursalSaved;
         SucursalDTO sucursalOut = new SucursalDTO();
 
         //endregion VARIABLES
@@ -38,13 +33,14 @@ public class SucursalServiceImpl implements SucursalService {
         //region ACTIONS
         try {
             // Transform from SucursalDTO to Sucursal
-            sucursal = new Sucursal(Utils.modelMapper.map(sucursalIn, Sucursal.class));
+            sucursalToSave = new Sucursal(Utils.modelMapper.map(sucursalIn, Sucursal.class));
 
             // Add to DDBB
-            sucursal2 = sucursalRepoInt.save(sucursal);
+            sucursalSaved = sucursalRepoInt.save(sucursalToSave);
 
             // Transform from Sucursal to SucursalDTO
-            sucursalOut = Utils.modelMapper.map(sucursal2, SucursalDTO.class);
+            sucursalOut = Utils.modelMapper.map(sucursalSaved, SucursalDTO.class);
+
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -66,6 +62,7 @@ public class SucursalServiceImpl implements SucursalService {
 
         //region ACTIONS
         try {
+            // Delete flor
             sucursalRepoInt.deleteById(idIn);
 
             resul = true;
@@ -100,7 +97,7 @@ public class SucursalServiceImpl implements SucursalService {
         for (Sucursal suc : sucursalList) {
             // Calculate the 'tipusSucursal' field.
             sucursalType = Utils.checkTypeCountry(suc.getPaisSucursal());
-            // Transform to SucursalDTO and add tolist.
+            // Transform to SucursalDTO and add to list.
             sucursalDTOList.add(new SucursalDTO(modelMapper.map(suc, SucursalDTO.class), sucursalType));
 
         }
@@ -139,6 +136,7 @@ public class SucursalServiceImpl implements SucursalService {
 
         // OUT
         return sucursalOutDTO;
+
     }
 
     @Override
@@ -172,6 +170,7 @@ public class SucursalServiceImpl implements SucursalService {
         // OUT
         System.out.println("Sucursal updated satisfactory!");
         return sucursalOutDTO;
+
     }
 
     //endregion METHODS: OVERRIDE

@@ -11,7 +11,6 @@ import java.util.List;
 @Service
 public interface SucursalService {
     //region METHODS
-
     /**
      * Method to add a new Sucursal on DDBB. This method check if country is UE or not.
      * This method transform Sucursal to SucursalDTO.
@@ -30,7 +29,7 @@ public interface SucursalService {
     boolean delete(int idIn);
 
     /**
-     * method to get all Sucursal what exist on DDBB.
+     * Method to get all Sucursal what exist on DDBB.
      * This method transform Sucursal to SucursalDTO.
      *
      * @return List of all Sucursales from DDBB.

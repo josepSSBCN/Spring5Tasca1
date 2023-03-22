@@ -6,9 +6,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Service layer for Sucursal
+ * Service layer for Flor
  */
-
 @Service
 public interface FlorService {
     //region METHODS
@@ -22,7 +21,7 @@ public interface FlorService {
      * null => some problem occurred;
      * pk_FlorID != 0 => Flor was add successfully.
      */
-    FlorDTO add(FlorDTO florDTO);
+    FlorDTO Add(FlorDTO florDTO);
 
     /**
      * Method to delete a Flor from DDBB.
@@ -33,7 +32,7 @@ public interface FlorService {
      * pk_FlorID = idIn => Flor delete with success.
      * pk_FlorID = 0 => ID doesn't exist on DDBB.
      */
-    FlorDTO delete(int idIn);
+    FlorDTO Delete(int idIn);
 
     /**
      * Method to get all Flors what exist on DDBB.
@@ -41,8 +40,7 @@ public interface FlorService {
      *
      * @return List of all Flors from DDBB.
      */
-    List<FlorDTO> getAll();
-
+    List<FlorDTO> GetAll();
 
     /**
      * Method to get the Flor with the ID like of the param.
@@ -53,7 +51,7 @@ public interface FlorService {
      * null => some problem occurred;
      * pk_FlorID = 0 => ID doesn't exist on DDBB.
      */
-    FlorDTO getOne(int idIn);
+    FlorDTO GetOne(int idIn);
 
     /**
      * If we want update a Flor's param, we must call this method.
@@ -64,9 +62,8 @@ public interface FlorService {
      * null => some problem occurred;
      * pk_FlorID = 0 => ID doesn't exist on DDBB.
      */
-    FlorDTO update(FlorDTO florIn);
+    FlorDTO Update(FlorDTO florIn);
 
     //endregion METHODS
-
 
 }

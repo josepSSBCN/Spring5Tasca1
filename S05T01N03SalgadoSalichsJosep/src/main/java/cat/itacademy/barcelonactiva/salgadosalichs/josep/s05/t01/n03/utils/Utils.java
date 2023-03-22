@@ -1,6 +1,5 @@
-package cat.itacademy.barcelonactiva.salgadosalichs.josep.s05.t01.n02.utils;
+package cat.itacademy.barcelonactiva.salgadosalichs.josep.s05.t01.n03.utils;
 
-import cat.itacademy.barcelonactiva.salgadosalichs.josep.s05.t01.n02.models.domain.TypeCountryENUM;
 import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
@@ -21,6 +20,9 @@ public class Utils {
 
     //region ATTRIBUTES: PRIVATE
     @Getter
+    private static String URLAPI512 = "http://localhost:9001/flor";
+
+    @Getter
     private static List<String> countriesUE = new ArrayList<>(Arrays.asList("Austria", "Belgium", "Bulgaria", "Croatia",
             "Republic of Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece",
             "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland",
@@ -35,13 +37,20 @@ public class Utils {
 
     //region ATTRIBUTES: TEXT
     @Getter
+    @Setter
     private static String unexpectedError = "Some unexpected error occurred!\nPlease try again later.";
     @Getter
+    @Setter
     private static String florNoInfo = "The Flor received, doesn't has all necessary information.";
     @Getter
+    @Setter
     private static String idNoDDBB = "The Flor with id = %s, doesn't exist on the ddbb.";
     @Getter
-    private static String someError = "Some error occurred when to %s '%s' on the DDBB.";
+    @Setter
+    private static String idNoExist = "this id = '%s', doesn't exist in system.";
+    @Getter
+    @Setter
+    private static String someError = "Some error occurred when to %s '%s' on the system.";
 
     //endregion ATTRIBUTES: TEXT
 
@@ -64,7 +73,7 @@ public class Utils {
 
         //region ACTIONS
         if (checkString(countryName)) {
-            result = (countriesUE.contains(countryName)) ? TypeCountryENUM.UE.label : TypeCountryENUM.NoUE.label;
+            ////*result = (countriesUE.contains(countryName)) ? TypeCountryENUM.UE.label : TypeCountryENUM.NoUE.label;
         }
 
         //endregion ACTIONS

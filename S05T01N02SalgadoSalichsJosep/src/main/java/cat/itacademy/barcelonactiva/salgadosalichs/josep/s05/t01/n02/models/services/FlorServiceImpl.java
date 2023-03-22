@@ -21,9 +21,8 @@ public class FlorServiceImpl implements FlorService {
 
 
     //region METHODS: OVERRIDE
-
     @Override
-    public FlorDTO add(FlorDTO florDTOIn) {
+    public FlorDTO Add(FlorDTO florDTOIn) {
         //region VARIABLES
         FlorEntity florToSave, florSaved;
         FlorDTO florDTOOut;
@@ -59,7 +58,7 @@ public class FlorServiceImpl implements FlorService {
     }
 
     @Override
-    public FlorDTO delete(int idIn) {
+    public FlorDTO Delete(int idIn) {
         //region VARIABLES
         FlorDTO florDTOOut;
 
@@ -96,7 +95,7 @@ public class FlorServiceImpl implements FlorService {
     }
 
     @Override
-    public List<FlorDTO> getAll() {
+    public List<FlorDTO> GetAll() {
         //region VARIABLES
         String florType;
         List<FlorEntity> florList;
@@ -129,7 +128,7 @@ public class FlorServiceImpl implements FlorService {
     }
 
     @Override
-    public FlorDTO getOne(int idIn) {
+    public FlorDTO GetOne(int idIn) {
         //region VARIABLES
         FlorEntity florSaved;
         FlorDTO florDTOOut;
@@ -171,7 +170,7 @@ public class FlorServiceImpl implements FlorService {
     }
 
     @Override
-    public FlorDTO update(FlorDTO florIn) {
+    public FlorDTO Update(FlorDTO florIn) {
         //region VARIABLES
         FlorEntity florToSave, florSaved;
         FlorDTO florDTOOut = null;
@@ -209,7 +208,6 @@ public class FlorServiceImpl implements FlorService {
 
 
         // OUT
-        System.out.println("Sucursal updated satisfactory!");
         return florDTOOut;
 
     }
